@@ -1,2 +1,1 @@
-# kokanek.github.io
-My Github pages web site
+# Developer website for Github-pages
