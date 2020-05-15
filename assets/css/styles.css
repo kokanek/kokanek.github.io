@@ -23,6 +23,7 @@ body {
   position: relative;
   flex-shrink: 0;
   margin-left: 40px;
+  box-shadow: 5px 5px 10px #78787888;
 }
 
 .youtube-container .player {
@@ -30,6 +31,79 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+.article-item {
+  position: relative;
+  flex-shrink: 0;
+  width: 500px;
+  height: 400px;
+  border-radius: 5px;
+  margin-right: 35px;
+  padding: 10px;
+  box-shadow: 5px 5px 10px #78787888;
+}
+
+.head {
+  font-size: 2rem;
+  padding: 10px;
+  font-family: sans-serif;
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+
+.description {
+  font-size: 2rem;
+  background-color: #dedede;
+  padding: 10px;
+  height: 200px;
+}
+
+.article-img {
+  padding: 10px;
+  width: 100%;
+}
+
+.icons {
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.icons a {
+  font-size: 3rem;
+  color: #343434;
+}
+
+.open:hover {
+  cursor: pointer;
+  color: #343434;
+  text-shadow: 0px 0px 10px #78787888;;
+}
+
+.render-icon {
+  font-size: 4rem;
+  color: #343434bb;
+}
+
+.num {
+  font-size: 3.5rem;
+  margin-left: 20px;
+}
+
+.heart {
+  color: #ff6678;
+}
+
+.comment {
+  color: #2388ee;
 }
 
 h1,

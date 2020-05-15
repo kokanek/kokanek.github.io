@@ -51,6 +51,10 @@
     <div id="place-youtube"> 
         This is the youtube placeholder
     </div>
+    <div id="place-dev">
+        This is the dev articles placeholder
+    </div>
+
     <div class="container sections-wrapper">
         <div class="row">
             <div class="primary col-md-8 col-sm-12 col-xs-12">
@@ -466,6 +470,64 @@
             YouTube({ video: "mYFaghHyMKc", autoplay: "0", rel: "0", modest: "1" }),
             document.getElementById('place-youtube')
         );
+
+        class DevArticles extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    articles: [],
+                }
+            }
+
+            callApi = (username = 'comscience') => {
+                fetch(`https://dev.to/api/articles?username=${username}`)
+                    .then((result) => {
+                        // Get the result
+                        // If we want text, call result.text()
+                        return result.json();
+                    }).then((jsonResult) => {
+                        // Do something with the result
+                        jsonResult.sort((a, b) => b.positive_reactions_count - a.positive_reactions_count);
+                        jsonResult.splice(10);
+                        this.setState({ articles: jsonResult })
+                    })
+            }
+
+            componentDidMount() {
+                this.callApi(this.props.username);
+            }
+
+            render() {
+                return (
+                    <div class="container" style={{ paddingTop: 60 }} >
+                        <section class="about section">
+                            <div class="section-inner">
+                                <h2 class="heading">Latest posts on my Dev blog</h2>
+                                <div class="section-inner" style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto' }}>
+                                    {this.state.articles.map(
+                                        item =>
+                                            <div className="article-item">
+                                                <h1 className="head"><strong>{item.title}</strong></h1>
+                                                {item.cover_image ?
+                                                    <img src={item.cover_image} className="article-img"></img> :
+                                                    <div className="description"><h2>{item.description}</h2></div>
+                                                }
+                                                <div className="icons">
+                                                    <div><i class="fa fa-heart render-icon heart"></i><span class="num"><strong>{item.positive_reactions_count}</strong></span></div>
+                                                    <div><i class="fa fa-comments-o render-icon comment"></i><span class="num"><strong>{item.comments_count}</strong></span></div>
+                                                    <a href={item.canonical_url} target="_blank"><i class="fa fa-external-link render-icon open"></i></a>
+                                                </div>
+                                            </div>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<DevArticles />, document.getElementById('place-dev'))
     </script>
 </body>
 </html>
